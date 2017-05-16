@@ -1,0 +1,12 @@
+extends ../layouts/default
+
+block content
+    .container
+        form(action="/login", method="post")
+            .form-group
+                label Username:
+                input(class="form-control", type="text", name="username")
+            .form-group
+                label Password:
+                input(class="form-control", type="password", name="password")
+            input(class="btn btn-primary", type="submit", value="Submit")

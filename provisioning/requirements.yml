@@ -1,0 +1,12 @@
+---
+- src: geerlingguy.nodejs
+  version: 4.1.1
+
+- src: Stouts.mongodb
+  version: 2.2.7
+
+- src: Oefenweb.yarn
+  version: v1.0.5
+
+- src: andrewrothstein.gcc-toolbox
+  version: v1.0.5

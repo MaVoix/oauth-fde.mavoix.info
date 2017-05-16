@@ -1,0 +1,9 @@
+---
+- hosts:
+    - local
+  gather_facts: yes
+  roles:
+    - {role: geerlingguy.nodejs, nodejs_install_npm_user: root}
+    - {role: Stouts.mongodb}
+    - {role: Oefenweb.yarn}
+    - {role: andrewrothstein.gcc-toolbox}

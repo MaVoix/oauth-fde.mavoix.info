@@ -1,0 +1,5 @@
+---
+environment_name: local
+hostname: oauth-fde-{{ environment_name }}
+front_web_public_host: oauth-fde.test
+is_development_environment: yes
