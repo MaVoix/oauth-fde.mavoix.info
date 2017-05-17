@@ -1,0 +1,9 @@
+---
+
+- name: Create .env file
+  lineinfile:
+    dest: /vagrant/app/.env
+    line: "{{ item.key }}={{ item.value }}"
+    regexp: "^{{ item.key }}"
+    create: yes
+  with_dict: "{{ app_env }}"

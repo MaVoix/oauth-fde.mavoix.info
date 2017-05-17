@@ -3,25 +3,28 @@
 
 var keystone = require('keystone');
 var argv = require('minimist')(process.argv.slice(2));
+var mongoUri = 'mongodb://127.0.0.1/oauth-fde-mavoix-info'
 
-keystone.init({headless: true});
+keystone.init({mongo: mongoUri, headless: true});
+keystone.mongoose.connect(mongoUri);
 keystone.import('../dist/models');
 
-var Admin = keystone.list('Admin');
+var User = keystone.list('User');
 
-function addUser(email, password, isAdmin, username, done) {
-  Admin.model.findOne({email:email})
+function addUser(email, password, isAdmin, firstname, lastname, birthdate, done) {
+  User.model.findOne({email:email})
     .exec((err, user) => {
       if (err) {
         return done(err);
       }
 
       if (!user) {
-        var newAdmin = new Admin.model({
+        var newAdmin = new User.model({
           email: email,
-          name: username,
+          name: {firstname: firstname, lastname: lastname},
           password: password,
           isAdmin: isAdmin,
+          birthdate: birthdate,
         });
 
         return newAdmin.save((saveErr) => {
@@ -29,19 +32,19 @@ function addUser(email, password, isAdmin, username, done) {
             return done(saveErr);
           }
 
-          console.log('Admin created.');
+          console.log('User created.');
           return done(null, newAdmin);
         });
       } else {
-        console.log('Admin already exists.');
+        console.log('User already exists.');
         return done(null, user);
       }
     });
 };
 
 addUser(
-  argv.email, argv.password, argv.isAdmin === 'true', argv.username,
-  (err, admin) => {
+  argv.email, argv.password, argv.isAdmin === 'true', argv.firstname, argv.lastname, argv.birthdate,
+  (err, user) => {
     if (!!err) {
       console.error(err);
       process.exit(1);

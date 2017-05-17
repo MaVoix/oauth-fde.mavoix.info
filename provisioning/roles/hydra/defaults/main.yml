@@ -1,0 +1,9 @@
+hydra_version: 0.8.2
+hydra_arch: linux-amd64
+hydra_download_url: https://github.com/ory/hydra/releases/download/v{{ hydra_version }}/hydra-{{ hydra_arch }}
+hydra_database_url: postgres://root:root@localhost/hydra?sslmode=disable
+hydra_system_secret: dTAiCVwMxP9VCizDhgC9iTq9NgbltuGf
+hydra_cookie_secret: w1JFEbCBiOUigeEgZ4xo37Rnqm8m6amz
+hydra_host: localhost
+hydra_port: 4444
+hydra_root_client_credentials: root:root

@@ -9,7 +9,7 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
-        title= title || 'oauth-fde.mavoix.info'
+        title= '#MAVOIX | Authentification des Français de l\'étranger'
         link(rel="shortcut icon", href="images/favicon.png", type="image/png")
 
         //- Customise the stylesheet for your site by editing /public/styles/site.less
@@ -58,9 +58,9 @@ html
                                 li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
                         ul.nav.navbar-nav.navbar-right
                             if user
-                                li: a(href='/logout') Sign Out
+                                li: a(href='/logout') Se Déconnecter
                             else
-                                li: a(href='/login') Sign In
+                                li: a(href='/login') Se Connecter
 
         //- BODY
         #body

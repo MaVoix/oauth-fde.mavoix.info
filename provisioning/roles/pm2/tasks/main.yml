@@ -19,3 +19,6 @@
   with_items: "{{ pm2_apps }}"
   register: result
   changed_when: "'starting' not in result.stdout"
+
+- name: Configure pm2 to start all apps on boot
+  shell: pm2 startup

@@ -1,0 +1,12 @@
+---
+
+- name: Download hydra binary
+  get_url:
+    url: "{{ hydra_download_url }}"
+    dest: /usr/bin/hydra
+    mode: u+x
+
+- name: Initialize hydra SQL database
+  shell: hydra migrate sql {{ hydra_database_url }}
+  register: result
+  changed_when: "'Applied a total of 0 SQL migrations.' not in result.stdout"

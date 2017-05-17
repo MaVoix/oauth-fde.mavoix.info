@@ -1,3 +1,5 @@
+require('babel-polyfill');
+
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
 require('dotenv').config();
@@ -7,7 +9,7 @@ var keystone = require('keystone');
 
 keystone.init({
 	'name': 'oauth-fde.mavoix.info',
-	'brand': 'oauth-fde.mavoix.info',
+	'brand': '#MAVOIX | Authentification des Français de l\'étranger',
 	'admin path': 'admin',
 
 	'less': 'public',
@@ -22,6 +24,7 @@ keystone.init({
 	'session': true,
 	'auth': true,
 	'user model': 'User',
+	'session store': 'mongo',
 });
 keystone.import('models');
 keystone.set('locals', {

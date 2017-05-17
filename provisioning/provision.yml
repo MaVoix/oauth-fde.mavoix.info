@@ -10,3 +10,4 @@
     - {role: ANXS.postgresql}
     - {role: hydra}
     - {role: pm2}
+    - {role: app}

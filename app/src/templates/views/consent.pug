@@ -1,0 +1,19 @@
+extends ../layouts/default
+
+block content
+    .container
+        h1 An application requests access to your data!
+        if error
+            p.
+                #{error}
+        form(action='',method='POST')
+            p.
+                The application wants access to scopes:
+            ul
+              each scope in scopes
+                  li
+                    input(type='hidden',value=scope,name='allowed_scopes')
+                    span #{scope}
+
+            input(type='hidden',name='challenge',value=challenge)
+            input(class='btn btn-primary', type='submit',value='Allow it!')
