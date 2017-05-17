@@ -10,7 +10,7 @@ html
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
         title= title || 'oauth-fde.mavoix.info'
-        link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+        link(rel="shortcut icon", href="images/favicon.png", type="image/png")
 
         //- Customise the stylesheet for your site by editing /public/styles/site.less
         //- All .less files will be automatically compiled and minified in production.
@@ -42,23 +42,23 @@ html
             //- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
             //- ... or completely change this header to suit your design.
 
-            div(role="navigation").navbar.navbar-default
-                .container-fluid
+            div(role="navigation").navbar.navbar-default.navbar-fixed-top
+                .container
                     .navbar-header
                         button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
                             span.sr-only Toggle navigation
                             span.icon-bar
                             span.icon-bar
                             span.icon-bar
-                        a.navbar-brand(href='/') oauth-fde.mavoix.info
+                        a.navbar-brand(href='/', id='logo')
+                            img(src='images/logo.png')
                     .collapse.navbar-collapse
                         ul.nav.navbar-nav.navbar-left
                             each link in navLinks
                                 li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
                         ul.nav.navbar-nav.navbar-right
                             if user
-                                if !user.canAccessKeystone
-                                    li: a(href='/keystone/signout') Sign Out
+                                li: a(href='/logout') Sign Out
                             else
                                 li: a(href='/login') Sign In
 

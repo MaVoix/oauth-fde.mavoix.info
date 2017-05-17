@@ -20,7 +20,7 @@ pm2_apps:
       script: /vagrant/app/dist/index.js
       cwd: /vagrant/app
       watch: yes
-      instances: 4
+      instances: 1
       exec_mode: cluster
       restart_delay: 5000
     - name: hydra
