@@ -1,12 +1,11 @@
 import keystone from 'keystone'
 
-export default (r, w) => {
-  new keystone.View(r, w).render(
+export default (req, res) => {
+  new keystone.View(req, res).render(
     'login',
     {
-      error: r.query.error,
-      // user,
-      challenge: r.query.challenge
+      error: req.query.error,
+      challenge: req.query.challenge
     }
   );
 }

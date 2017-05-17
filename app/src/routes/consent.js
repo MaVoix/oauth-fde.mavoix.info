@@ -2,7 +2,7 @@ import hydra from '../hydra';
 
 // This get's executed when we want to tell hydra that the user is authenticated and that he authorized the application
 async function resolveConsent(r, w, challenge, scopes = []) {
-  const user = r.session.user;
+  const user = r.user;
   const data = {};
 
   // Sometimes the body parser doesn't return an array, so let's fix that.
@@ -33,7 +33,7 @@ async function resolveConsent(r, w, challenge, scopes = []) {
 }
 
 export default async (r, w) => {
-  if (!r.session.isAuthenticated) {
+  if (!r.user) {
     return w.redirect('/login?error=Please+log+in&challenge=' + r.body.challenge);
   }
 

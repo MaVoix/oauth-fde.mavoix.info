@@ -39,7 +39,6 @@ keystone.set('nav', {
 	users: ['User'],
 });
 
-
 if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
 	console.log('----------------------------------------'
 	+ '\nWARNING: MISSING MAILGUN CREDENTIALS'

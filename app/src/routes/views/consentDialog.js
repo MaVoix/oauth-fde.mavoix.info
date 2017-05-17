@@ -5,12 +5,20 @@ import hydra from '../../hydra';
 export default (r, w) => {
   const view = new keystone.View(r, w);
 
-  if (!r.session.isAuthenticated) {
+  console.log(r.user);
+
+
+  if (!r.user) {
     // The user is not authenticated yet, so redirect him to the log in page
     return w.redirect('/login?error=Please+log+in&challenge=' + r.query.challenge);
   } else if (r.query.error) {
     // An error occurred (at hydra)
     return view.render('error', { error: { name: r.query.error, message: r.query.error_description } });
+  }
+
+  // admin are special accounts that cannot be used with OAuth but only for the KeystoneJS admin
+  if (r.user.isAdmin) {
+    return view.render('error', { error: { name: 'invalid_account', message: 'admin accounts cannot use OAuth' } });
   }
 
   // Ok, the user is authenticated! Let's show the consent screen!

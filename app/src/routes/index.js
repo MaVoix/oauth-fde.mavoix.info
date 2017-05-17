@@ -18,6 +18,4 @@ exports = module.exports = function (app) {
   app.post('/login', require('./login'));
   app.get('/consent', routes.views.consentDialog);
   app.post('/consent', require('./consent'));
-  // app.get('/logout', views.logout);
-  // app.get('/account', views.account);
 };

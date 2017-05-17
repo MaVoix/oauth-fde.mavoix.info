@@ -10,9 +10,13 @@ export default async (req, res) => {
   const user = await User.model.findOne({email: email});
 
   if (!!user && bcrypt.compare(user.password, password)) {
-    req.session.isAuthenticated = true;
-    req.session.user = user;
-    res.redirect('/consent?challenge=' + req.body.challenge);
+    keystone.session.signinWithUser(user, req, res, () => {
+      if (!!req.body.challenge) {
+        res.redirect('/consent?challenge=' + req.body.challenge);
+      } else {
+        res.redirect('/');
+      }
+    });
   } else {
     res.redirect('/login?error=Wrong+credentials+provided&challenge=' + challenge)
   }
