@@ -5,7 +5,8 @@ const Types = keystone.Field.Types;
 
 const OAuthClient = new keystone.List('OAuthClient', {
   noedit: true,
-  track: { createdAt: true, createdBy: true }
+  track: { createdAt: true, createdBy: true },
+  defaultColumns: 'name, clientId, allowedScopes',
 });
 
 OAuthClient.add({
