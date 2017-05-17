@@ -23,6 +23,18 @@ app_env:
   HYDRA_URL: "http://localhost:{{ hydra_port }}"
   COOKIE_SECRET: c0ec576616d244fc2cafcf1a961d20a0b19dad5992071c7f70023d64f0dffc2cf06520f7ad00fa68c55fd3c732fdad530eacff6353360671027d07d1bf466c54
 
+app_users:
+  - firstname: "Admin"
+    lastname: "#MAVOIX"
+    email: "admin@mavoix.info"
+    password: "admin"
+    is_admin: yes
+  - firstname: "Test"
+    lastname: "User"
+    email: "test@test.com"
+    password: "test"
+    is_admin: no
+
 pm2_apps:
     - name: keystonejs
       script: /vagrant/app/dist/index.js

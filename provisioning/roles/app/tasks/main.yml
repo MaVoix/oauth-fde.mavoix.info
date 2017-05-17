@@ -7,3 +7,8 @@
     regexp: "^{{ item.key }}"
     create: yes
   with_dict: "{{ app_env }}"
+
+- name: Create users
+  shell: ./create-user.js --firstname {{ item.firstname }} --lastname {{ item.lastname }} --password {{ item.password }} --email {{ item.email }} --isAdmin {{ item.is_admin | ternary('true', 'false') }}
+    cwd: /vagrant/app
+  with_items: "{{ app_users }}"

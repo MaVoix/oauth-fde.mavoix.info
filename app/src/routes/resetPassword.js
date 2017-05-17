@@ -9,7 +9,7 @@ export default async (req, res) => {
   const passwordConfirmation = req.body.passwordConfirmation;
   const view = new keystone.View(req, res);
 
-  if (password != passwordConfirmation) {
+  if (password != passwordConfirmation || password.length < 8) {
     return view.render('reset-password', {error: true, token: req.params.token});
   }
 
