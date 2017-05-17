@@ -21,7 +21,7 @@ keystone.init({
 	// 'auto update': true,
 	'session': true,
 	'auth': true,
-	'user model': 'Admin',
+	'user model': 'User',
 });
 keystone.import('models');
 keystone.set('locals', {

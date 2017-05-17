@@ -1,1 +1,10 @@
 ---
+
+postgresql_version: 9.6
+postgresql_databases:
+  - name: hydra
+    owner: root         # optional; specify the owner of the database
+    hstore: yes         # flag to install the hstore extension on this database (yes/no)
+    uuid_ossp: yes      # flag to install the uuid-ossp extension on this database (yes/no)
+    citext: yes         # flag to install the citext extension on this database (yes/no)
+    encoding: 'UTF-8'   # override global {{ postgresql_encoding }} variable per database

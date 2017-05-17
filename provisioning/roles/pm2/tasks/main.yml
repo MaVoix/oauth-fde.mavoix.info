@@ -1,0 +1,21 @@
+---
+
+- name: Install pm2
+  npm:
+    name: pm2
+    global: yes
+
+- name: Create /etc/pm2
+  file:
+    path: /etc/pm2
+    state: directory
+
+- name: Setup pm2 app configs
+  copy: content="{{ item }}" dest=/etc/pm2/{{ item.name }}.json
+  with_items: "{{ pm2_apps }}"
+
+- name: Start pm2 apps
+  shell: pm2 start /etc/pm2/{{ item.name }}.json
+  with_items: "{{ pm2_apps }}"
+  register: result
+  changed_when: "'starting' not in result.stdout"

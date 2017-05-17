@@ -3,7 +3,10 @@
     - local
   gather_facts: yes
   roles:
-    - {role: geerlingguy.nodejs, nodejs_install_npm_user: root}
+    - {role: geerlingguy.nodejs, nodejs_install_npm_user: root, npm_config_prefix: /usr/lib}
     - {role: Stouts.mongodb}
     - {role: Oefenweb.yarn}
     - {role: andrewrothstein.gcc-toolbox}
+    - {role: ANXS.postgresql}
+    - {role: hydra}
+    - {role: pm2}

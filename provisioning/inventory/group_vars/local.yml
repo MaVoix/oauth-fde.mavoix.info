@@ -3,3 +3,34 @@ environment_name: local
 hostname: oauth-fde-{{ environment_name }}
 front_web_public_host: oauth-fde.test
 is_development_environment: yes
+
+hydra_system_secret: dTAiCVwMxP9VCizDhgC9iTq9NgbltuGf
+hydra_cookie_secret: w1JFEbCBiOUigeEgZ4xo37Rnqm8m6amz
+hydra_host: localhost
+hydra_port: 4444
+hydra_root_client_credentials: root:root
+
+postgresql_users:
+  - name: root
+    pass: root
+    encrypted: no
+
+pm2_apps:
+    - name: keystonejs
+      script: /vagrant/app/dist/index.js
+      cwd: /vagrant/app
+      watch: yes
+      instances: 4
+      exec_mode: cluster
+      restart_delay: 5000
+    - name: hydra
+      script: hydra
+      watch: yes
+      args: host
+      env:
+        HOST: "{{ hydra_host }}"
+        PORT: "{{ hydra_port }}"
+        COOKIE_SECRET: "{{ hydra_cookie_secret }}"
+        DATABASE_URL: "{{ hydra_database_url }}"
+        SYSTEM_SECRET: "{{ hydra_system_secret }}"
+        FORCE_ROOT_CLIENT_CREDENTIALS: "{{ hydra_root_client_credentials }}"

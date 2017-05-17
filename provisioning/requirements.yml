@@ -10,3 +10,6 @@
 
 - src: andrewrothstein.gcc-toolbox
   version: v1.0.5
+
+- src: ANXS.postgresql
+  version: v1.7.1
