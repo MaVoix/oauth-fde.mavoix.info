@@ -33,8 +33,7 @@ keystone.set('locals', {
 keystone.set('routes', require('./routes'));
 
 keystone.set('nav', {
-	admins: ['admins'],
-    OAuth: ['OAuthUser', 'OAuthAccessToken', 'OAuthClient', 'OAuthAuthorizationCode'],
+	users: ['User'],
 });
 
 
