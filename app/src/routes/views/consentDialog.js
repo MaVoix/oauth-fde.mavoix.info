@@ -5,9 +5,6 @@ import hydra from '../../hydra';
 export default (r, w) => {
   const view = new keystone.View(r, w);
 
-  console.log(r.user);
-
-
   if (!r.user) {
     // The user is not authenticated yet, so redirect him to the log in page
     return w.redirect('/login?error=Please+log+in&challenge=' + r.query.challenge);
