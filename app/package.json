@@ -30,7 +30,8 @@
     "minimist": "^1.2.0",
     "oauth2orize": "^1.8.0",
     "pug": "2.0.0-beta11",
-    "save": "^2.3.0"
+    "save": "^2.3.0",
+    "secure-random-string": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "3.15.0",
