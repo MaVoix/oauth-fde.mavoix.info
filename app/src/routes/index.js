@@ -23,4 +23,5 @@ export default function(app) {
   app.post('/lost-password', require('./lostPassword'));
   app.get('/reset-password/:token', routes.views.resetPasswordForm);
   app.post('/reset-password/:token', require('./resetPassword'));
+  app.get('/account', middleware.requireUser, routes.views.account)
 };

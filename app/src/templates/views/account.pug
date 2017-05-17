@@ -2,5 +2,11 @@ extends ../layouts/default
 
 block content
     .container
-        p Username: user.username
-        p Name: user.name
+        .row
+            .col-xs-12
+                h1 Mon Compte
+                p
+                    | Vous êtes connecté en tant que 
+                    b #{user.email}.
+                
+                a(href='/logout') Se déconnecter

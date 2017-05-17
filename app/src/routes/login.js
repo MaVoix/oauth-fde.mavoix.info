@@ -14,7 +14,7 @@ export default async (req, res) => {
       if (!!req.body.challenge) {
         res.redirect('/consent?challenge=' + req.body.challenge);
       } else {
-        res.redirect('/');
+        res.redirect('/account');
       }
     });
   } else {
