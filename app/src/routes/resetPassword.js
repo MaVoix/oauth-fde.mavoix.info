@@ -10,7 +10,7 @@ export default async (req, res) => {
   const view = new keystone.View(req, res);
 
   if (password != passwordConfirmation || password.length < 8) {
-    return view.render('reset-password', {error: true, token: req.params.token});
+    return view.render('update-password', {error: true, token: req.params.token});
   }
 
   const tokens = await PasswordResetToken.model.find({expiration: {$gt: Date.now()}});
@@ -24,7 +24,7 @@ export default async (req, res) => {
 
       await PasswordResetToken.model.remove({user: user});
 
-      return view.render('reset-password', {success: true});
+      return view.render('update-password', {success: true});
     }
   }
 }

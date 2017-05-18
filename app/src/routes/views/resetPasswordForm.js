@@ -8,7 +8,7 @@ export default async (req, res) => {
 
   for (var t of tokens) {
     if (bcrypt.compareSync(req.params.token, t.token)) {
-      return new keystone.View(req, res).render('reset-password', {token: req.params.token});
+      return new keystone.View(req, res).render('update-password', {token: req.params.token});
     }
   }
 

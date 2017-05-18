@@ -9,4 +9,8 @@ block content
                     | Vous êtes connecté en tant que 
                     b #{user.email}.
                 
-                a(href='/logout') Se déconnecter
+                ul
+                    li
+                        a(href='/update-password') Changer mon mot de passe
+                    li
+                        a(href='/logout') Se déconnecter
