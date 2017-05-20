@@ -3,6 +3,7 @@
     - local
   gather_facts: yes
   roles:
+    - {role: kamaln7.swapfile, swapfile_size: 4GB}
     - {role: geerlingguy.nodejs, nodejs_install_npm_user: root, npm_config_prefix: /usr/lib}
     - {role: Stouts.mongodb}
     - {role: Oefenweb.yarn}

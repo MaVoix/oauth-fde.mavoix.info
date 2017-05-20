@@ -13,3 +13,5 @@
 
 - src: ANXS.postgresql
   version: v1.7.1
+
+- src: kamaln7.swapfile
