@@ -9,5 +9,5 @@
     - {role: andrewrothstein.gcc-toolbox}
     - {role: ANXS.postgresql}
     - {role: hydra}
-    - {role: pm2}
     - {role: app}
+    - {role: pm2}

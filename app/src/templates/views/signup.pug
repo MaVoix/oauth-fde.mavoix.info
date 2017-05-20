@@ -1,0 +1,74 @@
+extends ../layouts/default
+
+include ../mixins/bootstrap-datepicker
+
+block content
+    
+    .container
+        .row
+          
+            if success
+                .col-xs-12
+                    h1 Votre compte a été créé !
+                    p Avant de pouvoir vous connecter, vous devez activer votre compte. 
+                    p
+                        | Un e-mail a été envoyé à l'adresse suivante : 
+                        strong #{user.email}
+                        | . Cliquez dans le lien présent dans cet e-mail pour activer votre compte.
+                
+            else
+            
+                if error
+                    .col-xs-12
+                        .alert.alert-danger
+                            p Une erreur est survenue. Merci de vérifier les données du formulaire.
+                            | #{error.field}
+                
+                .col-md-4.col-sm-12
+                    h1 Créer mon compte
+                    form(action='', method='post')
+                        .form-group(class=error && error.email ? 'has-error' : '')
+                            label E-mail :
+                            input(class='form-control', type='text', name='email', value=data.email)
+                        .form-group(class=error && error.lastname ? 'has-error' : '')
+                            label Nom :
+                            input(class='form-control', type='text', name='lastname', value=data.lastname)
+                        .form-group(class=error && error.firstname ? 'has-error' : '')
+                            label Prénom :
+                            input(class='form-control', type='text', name='firstname', value=data.firstname)
+                        .form-group(class=error && error.birthdate ? 'has-error' : '')
+                            label Date de naissance :
+                            input(class='form-control datepicker', type='text', name='birthdate', value=data.birthdate)
+                        .form-group(class=error && error.password ? 'has-error' : '')
+                            label Mot de passe :
+                            input(class='form-control', type='password', name='password', value=data.password)
+                            span.help-block.
+                                Votre mot de passe doit faire au moins 8 caractères.
+                        .form-group(class=error && error.password ? 'has-error' : '')
+                            label Confirmation du mot de passe :
+                            input(class='form-control', type='password', name='passwordConfirmation', value=data.passwordConfirmation)
+                        .form-group
+                            .checkbox(class=error && error.cgu ? 'has-error' : '')
+                                label
+                                  input(class='', type='checkbox', name='cgu', value='true' checked=data.cgu == 'true')
+                                  | J'accepte les 
+                                  a(href='#') conditions générales 
+                                  | d'utilisation de ce service.
+                        
+                        input(type='hidden', name='token', value=token)
+                        input(class='btn btn-primary', type='submit', value='Créer mon compte')
+
+block js
+    +bootstrap-datepicker({
+        defaultViewDate: {
+          year: 1970,
+          month: 01,
+          day: 01,
+        },
+        autoclose: true,
+        startView: 2,
+        language: 'fr',
+        endDate: '0d',
+        format: 'yyyy-mm-dd',
+    })
+    

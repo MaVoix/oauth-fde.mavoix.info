@@ -1,5 +1,5 @@
-var _ = require('lodash');
-
+import _ from 'lodash';
+import keystone from 'keystone';
 
 /**
 	Initialises the standard view locals
@@ -33,8 +33,21 @@ exports.flashMessages = function (req, res, next) {
 exports.requireUser = function (req, res, next) {
 	if (!req.user) {
 		req.flash('error', 'Please sign in to access this page.');
-		res.redirect('/keystone/signin');
+		res.redirect('/login');
 	} else {
 		next();
 	}
 };
+
+exports.requireVisitor = function (req, res, next) {
+	if (!!req.user) {
+		res.redirect('/account');
+	} else {
+		next();
+	}
+};
+
+exports.view = function (req, res, next) {
+	res.view = new keystone.View(req, res);
+	next();
+}

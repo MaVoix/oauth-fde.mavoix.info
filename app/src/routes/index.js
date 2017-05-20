@@ -15,19 +15,22 @@ keystone.pre('render', middleware.flashMessages);
 export default function(app) {
   app.get('/', routes.views.index);
 
-  app.get('/login', routes.views.loginForm);
-  app.get('/logout', require('./logout'));
-  app.post('/login', require('./login'));
+  app.get('/sign-up/:token', middleware.requireVisitor, middleware.view, routes.views.signupForm);
+  app.post('/sign-up/:token', middleware.requireVisitor, middleware.view, require('./signup'));
 
-  app.get('/consent', routes.views.consentDialog);
-  app.post('/consent', require('./consent'));
+  app.get('/login', middleware.view, routes.views.loginForm);
+  app.get('/logout', middleware.requireUser, require('./logout'));
+  app.post('/login', middleware.requireVisitor, require('./login'));
 
-  app.get('/lost-password', routes.views.lostPasswordForm);
-  app.post('/lost-password', require('./lostPassword'));
-  app.get('/reset-password/:token', routes.views.resetPasswordForm);
-  app.post('/reset-password/:token', require('./resetPassword'));
+  app.get('/consent', middleware.requireUser,  middleware.view, routes.views.consentDialog);
+  app.post('/consent', middleware.requireUser, require('./consent'));
 
-  app.get('/update-password', middleware.requireUser, routes.views.updatePasswordForm);
+  app.get('/lost-password', middleware.requireVisitor, middleware.view, routes.views.lostPasswordForm);
+  app.post('/lost-password', middleware.requireVisitor, require('./lostPassword'));
+  app.get('/reset-password/:token', middleware.requireVisitor, middleware.view, routes.views.resetPasswordForm);
+  app.post('/reset-password/:token', middleware.requireVisitor, require('./resetPassword'));
+
+  app.get('/update-password', middleware.requireUser, middleware.view, routes.views.updatePasswordForm);
   app.post('/update-password', middleware.requireUser, require('./updatePassword'));
-  app.get('/account', middleware.requireUser, routes.views.account);
+  app.get('/account', middleware.requireUser, middleware.view, routes.views.account);
 };

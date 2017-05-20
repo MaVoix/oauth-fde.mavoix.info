@@ -9,8 +9,11 @@
   with_dict: "{{ app_env }}"
 
 - name: Install npm packages
-  npm:
-    path: /vagrant/app
+  npm: path=/vagrant/app
+
+- name: Build the app
+  shell: npm run build
+    cwd: /vagrant/app
 
 - name: Create users
   shell: ./create-user.js --firstname {{ item.firstname }} --lastname {{ item.lastname }} --password {{ item.password }} --email {{ item.email }} --isAdmin {{ item.is_admin | ternary('true', 'false') }}
