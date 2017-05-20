@@ -5,7 +5,7 @@
     "vars": {
       "hostname": "oauth-fde.test"
     },
-    "memory": 2048,
+    "memory": 8192,
     "sharedFolders": {
     }
   }

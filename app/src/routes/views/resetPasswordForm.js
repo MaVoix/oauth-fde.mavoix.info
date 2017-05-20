@@ -1,15 +1,13 @@
 import keystone from 'keystone';
-import bcrypt from 'bcrypt';
+import hash from '../../hash';
 
 const PasswordResetToken = keystone.list('PasswordResetToken');
 
 export default async (req, res) => {
-  const tokens = await PasswordResetToken.model.find({expiration: {$gt: Date.now()}});
+  const token = await PasswordResetToken.model.find({token: hash(req.params.token)});
 
-  for (var t of tokens) {
-    if (bcrypt.compareSync(req.params.token, t.token)) {
-      return new keystone.View(req, res).render('update-password', {token: req.params.token});
-    }
+  if (!!token) {
+    return res.view.render('update-password', {token: req.params.token});
   }
 
   // FIXME: proper error page/message

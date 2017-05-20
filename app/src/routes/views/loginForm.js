@@ -5,7 +5,7 @@ export default (req, res) => {
     return res.redirect('/account');
   }
 
-  new keystone.View(req, res).render(
+  res.view.render(
     'login',
     {
       error: req.query.error,

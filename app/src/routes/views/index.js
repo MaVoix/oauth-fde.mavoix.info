@@ -1,3 +1,3 @@
 import keystone from 'keystone'
 
-export default (req, res) => new keystone.View(req, res).render('index');
+export default (req, res) => res.view.render('index');

@@ -3,7 +3,7 @@
 
 var keystone = require('keystone');
 var argv = require('minimist')(process.argv.slice(2));
-var mongoUri = 'mongodb://127.0.0.1/oauth-fde-mavoix-info'
+var mongoUri = 'mongodb://127.0.0.1/oauth-fde-mavoix-info';
 
 keystone.init({mongo: mongoUri, headless: true});
 keystone.mongoose.connect(mongoUri);

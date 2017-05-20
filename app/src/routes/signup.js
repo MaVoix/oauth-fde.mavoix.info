@@ -1,6 +1,7 @@
 import keystone from 'keystone'
 import bcrypt from 'bcrypt';
 import validateEmail from '../validateEmail';
+import hash from '../hash';
 
 const User = keystone.list('User');
 const SignUpToken = keystone.list('SignUpToken');
@@ -18,16 +19,9 @@ export default async (req, res) => {
 
   var error = {};
 
-  // check the activation token
-  const existingTokens = await SignUpToken.model.find();
-  var validToken = null;
-  for (const existingToken of existingTokens) {
-    if (bcrypt.compareSync(token, existingToken.token)) {
-      validToken = existingToken;
-      break;
-    }
-  }
-  if (!validToken) {
+  // check the signup token
+  const existingTokens = await SignUpToken.model.findOne({token: hash(token)});
+  if (!existingTokens) {
     error['token'] = true;
   }
 

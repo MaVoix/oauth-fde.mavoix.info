@@ -1,5 +1,4 @@
 import keystone from 'keystone'
-import bcrypt from 'bcrypt'
 
 const User = keystone.list('User');
 
@@ -9,15 +8,33 @@ export default async (req, res) => {
   const challenge = req.body.challenge;
   const user = await User.model.findOne({email: email});
 
-  if (!!user && bcrypt.compare(user.password, password)) {
-    keystone.session.signinWithUser(user, req, res, () => {
-      if (!!req.body.challenge) {
-        res.redirect('/consent?challenge=' + req.body.challenge);
-      } else {
-        res.redirect('/account');
-      }
-    });
-  } else {
-    res.redirect('/login?error=Wrong+credentials+provided&challenge=' + challenge)
+  // user does not exist
+  if (!user) {
+    if (!!challenge) {
+      return res.redirect('/login?error=Wrong+credentials+provided&challenge=' + challenge);
+    } else {
+      return res.redirect('/login?error=Wrong+credentials+provided');
+    }
   }
+
+  user._.password.compare(password, (err, result) => {
+    console.log(err, result);
+    if (result) {
+      // password matches: let's sign the user in
+      keystone.session.signinWithUser(user, req, res, () => {
+        if (!!req.body.challenge) {
+          res.redirect('/consent?challenge=' + req.body.challenge);
+        } else {
+          res.redirect('/account');
+        }
+      });
+    } else {
+      // password does not match
+      if (!!challenge) {
+        res.redirect('/login?error=Wrong+credentials+provided&challenge=' + challenge);
+      } else {
+        res.redirect('/login?error=Wrong+credentials+provided');
+      }
+    }
+  })
 }
