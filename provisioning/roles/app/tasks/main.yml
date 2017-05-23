@@ -13,9 +13,9 @@
 
 - name: Build the app
   shell: npm run build
-    cwd: /vagrant/app
+  cwd: /vagrant/app
 
 - name: Create users
   shell: ./create-user.js --firstname {{ item.firstname }} --lastname {{ item.lastname }} --password {{ item.password }} --email {{ item.email }} --isAdmin {{ item.is_admin | ternary('true', 'false') }}
-    cwd: /vagrant/app
+  cwd: /vagrant/app
   with_items: "{{ app_users }}"
