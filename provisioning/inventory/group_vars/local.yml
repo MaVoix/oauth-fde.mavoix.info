@@ -22,6 +22,8 @@ app_env:
   HYDRA_CLIENT_SECRET: "{{ hydra_root_client_secret }}"
   HYDRA_URL: "http://localhost:{{ hydra_port }}"
   COOKIE_SECRET: c0ec576616d244fc2cafcf1a961d20a0b19dad5992071c7f70023d64f0dffc2cf06520f7ad00fa68c55fd3c732fdad530eacff6353360671027d07d1bf466c54
+  MAILGUN_API_KEY: ""
+  MAILGUN_DOMAIN: "auth.mavoix.info"
 
 app_users:
   - firstname: "Admin"
