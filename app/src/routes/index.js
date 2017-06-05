@@ -33,4 +33,6 @@ export default function(app) {
   app.get('/update-password', middleware.requireUser, middleware.view, routes.views.updatePasswordForm);
   app.post('/update-password', middleware.requireUser, require('./updatePassword'));
   app.get('/account', middleware.requireUser, middleware.view, routes.views.account);
+
+  app.get('/legal-terms', middleware.view, routes.views.legalTerms);
 };
