@@ -1,6 +1,7 @@
 import keystone from 'keystone';
 import srs from 'secure-random-string';
 import Mailgun from 'mailgun-js';
+import pug from 'pug';
 
 const User = keystone.list('User');
 const PasswordResetToken = keystone.list('PasswordResetToken');
@@ -14,13 +15,17 @@ export default async (req, res) => {
     const token = PasswordResetToken.model({user: user, token: srs(32)});
     const api_key = process.env.MAILGUN_API_KEY;
     const domain = process.env.MAILGUN_DOMAIN;
+    const locals = {
+      resetPasswordUrl : process.env.HYDRA_URL + "/reset-password/" + token
+    }
+    const htmlEmail = pug.renderFile('../templates/views/lost-password-email.pug', locals);
 
     var mailgun = new Mailgun({apiKey: api_key, domain: domain});
     var data = {
       from: "no-reply@auth.mavoix.info",
       to: email,
       subject: "Réinitialiser votre mot de passe #MAVOIX",
-      html: "Ajouter le HTML du mail ici."
+      html: htmlEmail
     };
 
     //Invokes the method to send emails given the above data with the helper library
